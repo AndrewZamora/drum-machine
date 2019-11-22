@@ -1,50 +1,63 @@
 import React, { Component } from 'react'
+import clap_audio from './audio/clap.wav';
 
-const DrumPad = props => {
-  const { func } = props;
-  const drumBtns = [
-    {
-      name: "Q"
-    },
-    {
-      name: "W"
-    },
-    {
-      name: "E"
-    },
-    {
-      name: "A"
-    },
-    {
-      name: "S"
-    },
-    {
-      name: "D"
-    },
-    {
-      name: "Z"
-    },
-    {
-      name: "X"
-    },
-    {
-      name: "C"
-    }
-  ]
-  const pad = drumBtns.map((btn, index) => {
+const capitalize = (str) => {
+  return typeof str === 'string' ? str.charAt(0).toUpperCase() + str.slice(1) : '';
+};
+
+class DrumPad extends Component {
+  render() {
+    const { func } = this.props;
+    const drumBtns = [
+      {
+        name: "Q"
+      },
+      {
+        name: "W"
+      },
+      {
+        name: "E"
+      },
+      {
+        name: "A"
+      },
+      {
+        name: "S"
+      },
+      {
+        name: "D"
+      },
+      {
+        name: "Z"
+      },
+      {
+        name: "X"
+      },
+      {
+        name: "C"
+      }
+    ]
+    const pad = drumBtns.map((btn, index) => {
+      return (
+        <button
+          className="drum-pad"
+          id={btn.name + "_btn"}
+          key={index + btn.name}
+          onKeyPress={(event) => func(event, this[btn.name])}
+          onClick={(event) => func(event, this[btn.name])}>
+          {btn.name}
+          <audio ref={audio => (this[btn.name] = audio)} id={btn.name} className="clip" src={clap_audio} type="audio/wav"></audio>
+        </button>
+      )
+    });
     return (
-      <button className="drum-pad" id={btn.name + "_btn"} key={index + btn.name} onClick={func(btn.name + "_ref")}>
-        {btn.name}
-        <audio ref={btn.name + "_ref"} id={btn.name} className="clip" src="Cymatics - Cobra Clap 12.wav" type="audio/wav"></audio>
-      </button>
+      <div>
+        {pad}
+      </div>
     )
-  });
-  return (
-    <div>
-      {pad}
-    </div>
-  );
+  }
 }
+
 
 class App extends Component {
   constructor(props) {
@@ -53,14 +66,22 @@ class App extends Component {
       keys: ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"]
     };
   }
-  onClick = audio => {
-    audio.current.play();
+  onClick = async (event, ref) => {
+    console.log(event,ref.id)
+    if (event.key) {
+      console.log(event.key,)
+    }
+    try {
+      await ref.play()
+    } catch (error) {
+      console.log(error)
+    }
   }
   render() {
     return (
       <main id="drum-machine">
         <div id="display">
-          <DrumPad func={() => this.onClick} />
+          <DrumPad func={(event, ref) => this.onClick(event, ref)} />
         </div>
       </main>
     )
