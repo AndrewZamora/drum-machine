@@ -64,7 +64,7 @@ class App extends Component {
       })
     })
   }
-  handleBtnClick = async (name) => {
+  handleBtnClick = async name => {
     try {
       await this.state[`${name}_ref`].current.play()
     } catch (error) {
@@ -86,8 +86,8 @@ class App extends Component {
       <main id="drum-machine">
         <div id="display">
           <DrumPad
-            click={(name) => this.handleBtnClick(name)}
-            sendRefs={(ref) => this.getRefs(ref)}
+            click={name => this.handleBtnClick(name)}
+            sendRefs={ref => this.getRefs(ref)}
             keys={this.state.keys} />
         </div>
       </main>
