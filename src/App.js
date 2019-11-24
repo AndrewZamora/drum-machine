@@ -8,12 +8,12 @@ const capitalize = str => {
 class DrumPad extends Component {
   constructor(props) {
     super(props);
-    props.keys.forEach(key => {
+    const allRefs = {}
+    this.props.keys.forEach(key => {
       this[`${key}_ref`] = React.createRef();
+      allRefs[`${key}_ref`] = this[`${key}_ref`];
     });
-  }
-  componentDidMount() {
-    this.props.sendRefs(this)
+    this.props.sendRefs(allRefs);
   }
   render() {
     const { click, keys } = this.props;
@@ -52,33 +52,24 @@ class App extends Component {
     document.removeEventListener("keydown", this.handleKeyPress, false);
   }
   getRefs = refs => {
-    const drumKeys = this.state.keys.map(key => {
-      return `${key}_ref`;
+    this.setState({
+      refs: refs
     });
-    const desiredRefs = Object.keys(refs).filter(key => {
-      return drumKeys.includes(key)
-    });
-    desiredRefs.forEach(item => {
-      this.setState({
-        [`${item}`]: refs[`${item}`]
-      })
-    })
   }
-  handleBtnClick = async name => {
+  playAudio = async key => {
     try {
-      await this.state[`${name}_ref`].current.play()
+      await this.state.refs[`${key}_ref`].current.play()
     } catch (error) {
       console.log(error)
     }
   }
-  handleKeyPress = async event => {
+  handleBtnClick = key => {
+    this.playAudio(key);
+  }
+  handleKeyPress = event => {
     const pressedKey = capitalize(event.key);
     if (this.state.keys.includes(pressedKey)) {
-      try {
-        await this.state[`${pressedKey}_ref`].current.play()
-      } catch (error) {
-        console.log(error)
-      }
+      this.playAudio(pressedKey);
     }
   }
   render() {
