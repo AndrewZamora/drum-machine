@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
-import clap_audio from './audio/clap.wav';
-
-const capitalize = str => {
-  return typeof str === 'string' ? str.charAt(0).toUpperCase() + str.slice(1) : '';
-};
-
+// AUDIO FILES
+import clap from './audio/clap.wav';
+import cymbals from './audio/Cymatics - Cobra Ride 2.wav';
+import kick from './audio/Cymatics - Cobra Kick 2 - C.wav';
+// COMPONENTS
 class DrumPad extends Component {
   constructor(props) {
     super(props);
     const allRefs = {}
     this.props.keys.forEach(key => {
-      this[`${key}_ref`] = React.createRef();
-      allRefs[`${key}_ref`] = this[`${key}_ref`];
+      this[`${key.name}_ref`] = React.createRef();
+      allRefs[`${key.name}_ref`] = this[`${key.name}_ref`];
     });
     this.props.sendRefs(allRefs);
   }
@@ -21,11 +20,11 @@ class DrumPad extends Component {
       return (
         <button
           className="drum-pad"
-          id={key + "_btn"}
-          key={index + key}
-          onClick={() => click(key)}>
-          {key}
-          <audio ref={this[`${key}_ref`]} id={key} className="clip" src={clap_audio} type="audio/wav"></audio>
+          id={key.name + "_btn"}
+          key={index + key.name}
+          onClick={() => click(key.name)}>
+          {key.name}
+          <audio ref={this[`${key.name}_ref`]} id={key.name} className="clip" src={key.audio} type="audio/wav"></audio>
         </button>
       )
     });
@@ -37,12 +36,11 @@ class DrumPad extends Component {
   }
 }
 
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      keys: ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"]
+      keys: [{ name: "Q", audio: cymbals, description: "cymbals" }, { name: "W", audio: clap, description: "clap" }, { name: "E", audio: kick, description: "kick" }, { name: "A", audio: clap, }, { name: "S", audio: clap, }, { name: "D", audio: clap }, { name: "Z", audio: clap }, { name: "X", audio: clap }, { name: "C", audio: clap }]
     };
   }
   componentDidMount() {
@@ -50,6 +48,9 @@ class App extends Component {
   }
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleKeyPress, false);
+  }
+  getKeyNames = () => {
+    return this.state.keys.map(key => key.name);
   }
   getRefs = refs => {
     this.setState({
@@ -66,9 +67,10 @@ class App extends Component {
   handleBtnClick = key => {
     this.playAudio(key);
   }
-  handleKeyPress = event => {
-    const pressedKey = capitalize(event.key);
-    if (this.state.keys.includes(pressedKey)) {
+  handleKeyPress = async event => {
+    const keys = this.getKeyNames();
+    const pressedKey = event.key.toUpperCase();
+    if (keys.includes(pressedKey)) {
       this.playAudio(pressedKey);
     }
   }
