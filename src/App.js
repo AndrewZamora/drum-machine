@@ -7,13 +7,13 @@ import kick from './audio/Cymatics - Cobra Kick 2 - C.wav';
 class DrumPad extends Component {
   constructor(props) {
     super(props);
-    const allRefs = {}
+    const allRefs = {};
     this.props.keys.forEach(key => {
       this[`${key.name}_ref`] = React.createRef();
       allRefs[`${key.name}_ref`] = this[`${key.name}_ref`];
     });
     this.props.sendRefs(allRefs);
-  }
+  };
   render() {
     const { click, keys } = this.props;
     const pad = keys.map((key, index) => {
@@ -42,38 +42,38 @@ class App extends Component {
     this.state = {
       keys: [{ name: "Q", audio: cymbals, description: "cymbals" }, { name: "W", audio: clap, description: "clap" }, { name: "E", audio: kick, description: "kick" }, { name: "A", audio: clap, }, { name: "S", audio: clap, }, { name: "D", audio: clap }, { name: "Z", audio: clap }, { name: "X", audio: clap }, { name: "C", audio: clap }]
     };
-  }
+  };
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyPress, false);
-  }
+  };
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleKeyPress, false);
-  }
+  };
   getKeyNames = () => {
     return this.state.keys.map(key => key.name);
-  }
+  };
   getRefs = refs => {
     this.setState({
       refs: refs
     });
-  }
-  playAudio = async key => {
+  };
+  playAudio = key => {
     try {
-      await this.state.refs[`${key}_ref`].current.play()
+      this.state.refs[`${key}_ref`].current.play()
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   handleBtnClick = key => {
     this.playAudio(key);
-  }
+  };
   handleKeyPress = async event => {
     const keys = this.getKeyNames();
     const pressedKey = event.key.toUpperCase();
     if (keys.includes(pressedKey)) {
       this.playAudio(pressedKey);
     }
-  }
+  };
   render() {
     return (
       <main id="drum-machine">
@@ -85,7 +85,7 @@ class App extends Component {
         </div>
       </main>
     )
-  }
+  };
 }
 
 
