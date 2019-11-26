@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import clap from './audio/clap.wav';
 import cymbals from './audio/Cymatics - Cobra Ride 2.wav';
 import kick from './audio/Cymatics - Cobra Kick 2 - C.wav';
+// GLOBALS
+const hardCodedKeys = [{ name: "Q", audio: cymbals, description: "cymbals" }, { name: "W", audio: clap, description: "clap" }, { name: "E", audio: kick, description: "kick" }, { name: "A", audio: clap, description: "clap" }, { name: "S", audio: clap, description: "clap" }, { name: "D", audio: clap, description: "clap" }, { name: "Z", audio: clap, description: "clap" }, { name: "X", audio: clap, description: "clap" }, { name: "C", audio: clap, description: "clap" }];
 // COMPONENTS
 class DrumPad extends Component {
   constructor(props) {
@@ -40,7 +42,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      keys: [{ name: "Q", audio: cymbals, description: "cymbals" }, { name: "W", audio: clap, description: "clap" }, { name: "E", audio: kick, description: "kick" }, { name: "A", audio: clap, }, { name: "S", audio: clap, }, { name: "D", audio: clap }, { name: "Z", audio: clap }, { name: "X", audio: clap }, { name: "C", audio: clap }]
+      keys: hardCodedKeys,
+      display: ''
     };
   };
   componentDidMount() {
@@ -57,32 +60,43 @@ class App extends Component {
       refs: refs
     });
   };
+  getKeyDescription = keyName => {
+    const [match] = this.state.keys.filter(key => {
+      return keyName === key.name;
+    });
+    return match.description;
+  };
   playAudio = key => {
     try {
-      this.state.refs[`${key}_ref`].current.play()
+      this.state.refs[`${key}_ref`].current.play();
     } catch (error) {
       console.log(error);
-    }
+    };
   };
   handleBtnClick = key => {
+    this.setState({
+      display: this.getKeyDescription(key)
+    });
     this.playAudio(key);
   };
   handleKeyPress = async event => {
     const keys = this.getKeyNames();
     const pressedKey = event.key.toUpperCase();
     if (keys.includes(pressedKey)) {
+      this.setState({
+        display: this.getKeyDescription(pressedKey)
+      });
       this.playAudio(pressedKey);
     }
   };
   render() {
     return (
       <main id="drum-machine">
-        <div id="display">
-          <DrumPad
-            click={name => this.handleBtnClick(name)}
-            sendRefs={ref => this.getRefs(ref)}
-            keys={this.state.keys} />
-        </div>
+        <div id="display">{this.state.display}</div>
+        <DrumPad
+          click={name => this.handleBtnClick(name)}
+          sendRefs={ref => this.getRefs(ref)}
+          keys={this.state.keys} />
       </main>
     )
   };
