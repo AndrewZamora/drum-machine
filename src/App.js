@@ -31,7 +31,7 @@ class DrumPad extends Component {
       )
     });
     return (
-      <div>
+      <div className="drum-pad-container">
         {pad}
       </div>
     )
@@ -92,7 +92,7 @@ class App extends Component {
   render() {
     return (
       <main id="drum-machine">
-        <div id="display">{this.state.display}</div>
+        <div id="display" className="display">{this.state.display}</div>
         <DrumPad
           click={name => this.handleBtnClick(name)}
           sendRefs={ref => this.getRefs(ref)}

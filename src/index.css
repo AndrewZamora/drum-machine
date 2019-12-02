@@ -1,7 +1,9 @@
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
 }
+
 body {
   display: flex;
   justify-content: center;
@@ -12,9 +14,44 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #333333;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.drum-pad-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.drum-pad {
+  border: none;
+  /* border-radius: 10px; */
+  height: 9em;
+  width: 9em;
+  margin: 1em;
+  cursor: pointer;
+  background: #4CAF50;
+  box-shadow: inset 0px 0 23px #4b4b4b,      /*  */
+  inset 20px 0 80px #4CAF50,
+  0 0 0 #4CAF50,
+  0 0 0 0 #4CAF50; 
+}
+
+.drum-pad:hover {
+  
+              box-shadow: inset 0px 0 23px #4b4b4b,      /*  */
+              inset 20px 0 80px #4CAF50,
+              0 0 50px #4CAF50,
+              4px 5px 10px 4px #4CAF50;      
+}
+
+.display {
+  margin-bottom: 2em;
+  color: #fcfcfc;
+  font-size: 2.5em;
+  text-transform: capitalize;
 }
