@@ -21,7 +21,7 @@ class DrumPad extends Component {
     const pad = keys.map((key, index) => {
       return (
         <button
-          className="drum-pad"
+          className={`drum-pad btn-${index}`}
           id={key.name + "_btn"}
           key={index + key.name}
           onClick={() => click(key.name)}>

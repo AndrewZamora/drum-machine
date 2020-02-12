@@ -34,19 +34,141 @@ code {
   width: 9em;
   margin: 1em;
   cursor: pointer;
-  background: #4CAF50;
-  box-shadow: inset 0px 0 23px #4b4b4b,      /*  */
-  inset 20px 0 80px #4CAF50,
-  0 0 0 #4CAF50,
-  0 0 0 0 #4CAF50; 
 }
 
-.drum-pad:hover {
-  
-              box-shadow: inset 0px 0 23px #4b4b4b,      /*  */
-              inset 20px 0 80px #4CAF50,
-              0 0 50px #4CAF50,
-              4px 5px 10px 4px #4CAF50;      
+.btn-0 {
+  background: #4CAF50;
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px #4CAF50,
+    0 0 0 #4CAF50,
+    0 0 0 0 #4CAF50;
+}
+
+.btn-0:hover {
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px #4CAF50,
+    0 0 50px #4CAF50,
+    4px 5px 10px 4px #4CAF50;
+}
+
+.btn-1 {
+  background: #f0f;
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px #f0f,
+    0 0 0 #f0f,
+    0 0 0 0 #f0f;
+}
+
+.btn-1:hover {
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px #f0f,
+    0 0 50px #f0f,
+    4px 5px 10px 4px #f0f;
+}
+
+.btn-2 {
+  background: cyan;
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px cyan,
+    0 0 0 cyan,
+    0 0 0 0 cyan;
+}
+
+.btn-2:hover {
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px cyan,
+    0 0 50px cyan,
+    4px 5px 10px 4px cyan;
+}
+
+.btn-3 {
+  background: orange;
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px orange,
+    0 0 0 orange,
+    0 0 0 0 orange;
+}
+
+.btn-3:hover {
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px orange,
+    0 0 50px orange,
+    4px 5px 10px 4px orange;
+}
+
+.btn-8 {
+  background: purple;
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px purple,
+    0 0 0 purple,
+    0 0 0 0 purple;
+}
+
+.btn-8:hover {
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px purple,
+    0 0 50px purple,
+    4px 5px 10px 4px purple;
+}
+
+.btn-5 {
+  background: rgb(247, 247, 67);
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px rgb(247, 247, 67),
+    0 0 0 rgb(247, 247, 67),
+    0 0 0 0 rgb(247, 247, 67);
+}
+
+.btn-5:hover {
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px rgb(247, 247, 67),
+    0 0 50px rgb(247, 247, 67),
+    4px 5px 10px 4px rgb(247, 247, 67);
+}
+
+.btn-6 {
+  background: rgb(250, 47, 47);
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px rgb(250, 47, 47),
+    0 0 0 rgb(250, 47, 47),
+    0 0 0 0 rgb(250, 47, 47);
+}
+
+.btn-6:hover {
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px rgb(250, 47, 47),
+    0 0 50px rgb(250, 47, 47),
+    4px 5px 10px 4px rgb(250, 47, 47);
+}
+
+.btn-7 {
+  background: rgb(69, 69, 230);
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px rgb(69, 69, 230),
+    0 0 0 rgb(69, 69, 230),
+    0 0 0 0 rgb(69, 69, 230);
+}
+
+.btn-7:hover {
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px rgb(69, 69, 230),
+    0 0 50px rgb(69, 69, 230),
+    4px 5px 10px 4px rgb(69, 69, 230);
+}
+
+.btn-4 {
+  background: #fcfcfc;
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px #fcfcfc,
+    0 0 0 #fcfcfc,
+    0 0 0 0 #fcfcfc;
+}
+
+.btn-4:hover {
+  box-shadow: inset 0px 0 23px #4b4b4b,
+    inset 20px 0 80px #fcfcfc,
+    0 0 50px #fcfcfc,
+    4px 5px 10px 4px #fcfcfc;
 }
 
 .display {
@@ -54,4 +176,5 @@ code {
   color: #fcfcfc;
   font-size: 2.5em;
   text-transform: capitalize;
+  text-align: right;
 }
